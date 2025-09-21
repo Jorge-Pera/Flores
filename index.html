@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌼 For you 🌼</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #fff3b0, #ffe66d);
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+      flex-direction: column;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      font-size: 2.5rem;
+      color: #444;
+      animation: fadeIn 3s ease-in-out;
+      margin-bottom: 20px;
+    }
+
+    /* Botón para reproducir música */
+    button {
+      background: #f4d35e;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      color: #444;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s, background 0.3s;
+      z-index: 10;
+    }
+
+    button:hover {
+      background: #ffd60a;
+      transform: scale(1.05);
+    }
+
+    /* Imagen oculta inicialmente */
+    #imagen {
+      display: none;
+      margin-top: 20px;
+      max-width: 80%;
+      border-radius: 15px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 2s ease-in-out;
+      z-index: 10;
+    }
+
+    /* Animación de flores cayendo */
+    .flower {
+      position: absolute;
+      top: -50px;
+      font-size: 2rem;
+      animation: fall linear infinite;
+      color: #f4d35e;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.7; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8);}
+      to { opacity: 1; transform: scale(1);}
+    }
+
+    /* Ocultar el iframe */
+    iframe {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌻 A tu lado, cualquier día se convierte en el mejor de mi vida. 🌻 <br>TE AMO 💛</h1>
+
+  <!-- Botón para iniciar la música -->
+  <button onclick="playMusic()">Click me</button>
+
+  <!-- Imagen oculta -->
+  <img id="imagen" src="image.jpeg" alt="Flores amarillas">
+  <link rel="stylesheet" href="image.css">
+
+  <!-- Canción de YouTube (oculta) -->
+  <iframe 
+    id="ytplayer"
+    src="https://www.youtube.com/embed/S7gMzYqXIZc?enablejsapi=1&loop=1&playlist=S7gMzYqXIZc"
+    frameborder="0" 
+    allow="autoplay">
+  </iframe>
+
+  <script>
+    // Función para reproducir música y mostrar imagen
+    function playMusic() {
+      const player = document.getElementById("ytplayer").contentWindow;
+      player.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+
+      // Mostrar imagen
+      document.getElementById("imagen").style.display = "block";
+    }
+
+    // Crear flores dinámicamente
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.innerHTML = "🌻";
+      flower.style.left = Math.random() * window.innerWidth + "px";
+      flower.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      flower.style.fontSize = (Math.random() * 15 + 20) + "px";
+      document.body.appendChild(flower);
+
+      setTimeout(() => {
+        flower.remove();
+      }, 6000);
+    }
+
+    setInterval(createFlower, 300);
+  </script>
+</body>
+</html>

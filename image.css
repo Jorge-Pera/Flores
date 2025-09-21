@@ -1,0 +1,11 @@
+/* Imagen ajustada */
+#imagen {
+  display: none;
+  margin: 20px auto;
+  max-width: 250px;   /* tamaño ideal en celulares */
+  width: 80%;         /* ocupa máximo el 80% de la pantalla */
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.25);
+  animation: fadeIn 1.5s ease-in-out;
+  z-index: 10;
+}
